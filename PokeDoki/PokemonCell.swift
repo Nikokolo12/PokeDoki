@@ -11,17 +11,25 @@ class PokemonCell: UITableViewCell {
     static let identifier = "cell"
     var nameLabel: UILabel = {
         var label = UILabel()
-        label.text = "Pokemob"
+        label.text = "Pokemon"
+        label.translatesAutoresizingMaskIntoConstraints = false
+        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
         return label
     }()
-    override func awakeFromNib() {
-        super.awakeFromNib()
+    
+    override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
+        super.init(style: style, reuseIdentifier: reuseIdentifier)
+        addSubview(nameLabel)
+        NSLayoutConstraint.activate([
+                    nameLabel.topAnchor.constraint(equalTo: contentView.topAnchor, constant: 8),
+                    nameLabel.leadingAnchor.constraint(equalTo: contentView.leadingAnchor, constant: 16),
+                    nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
+                    nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
+                ])
     }
     
-    override func setSelected(_ selected: Bool, animated: Bool) {
-        super.setSelected(selected, animated: animated)
-        
-        // Configure the view for the selected state
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
 }
