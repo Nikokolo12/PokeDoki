@@ -8,7 +8,7 @@
 import UIKit
 
 class ViewController: UIViewController {
-    var pokeNames: [PokemonSection] = []
+    var pokemons: [PokemonSection] = []
     private let apiCaller = APICaller()
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -36,17 +36,6 @@ class ViewController: UIViewController {
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
         
-        apiCaller.fetchPokeData(pagination: false){ [weak self] result in
-            switch result {
-            case .success(let someData):
-                self?.pokeNames.append(contentsOf: someData)
-                DispatchQueue.main.async {
-                    self?.applySnapshot()
-                }
-            case .failure(_):
-                print("Error with fetching")
-            }
-        }
     }
     
     override func viewDidLayoutSubviews() {
@@ -55,7 +44,7 @@ class ViewController: UIViewController {
         apiCaller.fetchPokeData(pagination: false){ [weak self] result in
             switch result {
             case .success(let someData):
-                self?.pokeNames.append(contentsOf: someData)
+                self?.pokemons.append(contentsOf: someData)
                 DispatchQueue.main.async {
                     self?.applySnapshot()
                 }
@@ -68,8 +57,7 @@ class ViewController: UIViewController {
     private func createDiffableDataSource(_ tableView: UITableView) -> UITableViewDiffableDataSource<ViewControllerSection, PokemonSection> {
         let dataSource = UITableViewDiffableDataSource<ViewControllerSection, PokemonSection>(tableView: tableView) { tableView, indexPath, item in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: PokemonCell.identifier, for: indexPath) as? PokemonCell else { return UITableViewCell() }
-            // TODO: API
-            let pokemon = self.pokeNames[indexPath.row]
+            let pokemon = self.pokemons[indexPath.row]
             cell.nameLabel.text = pokemon.name
             return cell
         }
@@ -79,7 +67,7 @@ class ViewController: UIViewController {
     func applySnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<ViewControllerSection, PokemonSection>()
         snapshot.appendSections([.main])
-        snapshot.appendItems(pokeNames, toSection: .main)
+        snapshot.appendItems(pokemons, toSection: .main)
         dataSource.apply(snapshot, animatingDifferences: true)
     }
     
@@ -95,12 +83,13 @@ class ViewController: UIViewController {
 
 extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected \(pokeNames[indexPath.row])")
+        print("Selected \(pokemons[indexPath.row])")
     }
     
 }
 
 extension ViewController: UIScrollViewDelegate {
+    
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
         if (position > self.tableView.contentSize.height - scrollView.frame.size.height - 20) {
@@ -113,7 +102,7 @@ extension ViewController: UIScrollViewDelegate {
                 }
                 switch result {
                 case .success(let newData):
-                    self?.pokeNames.append(contentsOf: newData)
+                    self?.pokemons.append(contentsOf: newData)
                     DispatchQueue.main.async {
                         self?.applySnapshot()
                     }
@@ -121,7 +110,6 @@ extension ViewController: UIScrollViewDelegate {
                     print("Error with fetching")
                 }
             }
-            print("Fetched")
         }
     }
 }

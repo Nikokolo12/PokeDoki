@@ -23,6 +23,21 @@
             </objects>
             <point key="canvasLocation" x="30" y="50"/>
         </scene>
+        <!--Card View Controller-->
+        <scene sceneID="c5Z-Kd-RJ3">
+            <objects>
+                <viewController id="gSL-AU-VLE" customClass="CardViewController" customModule="PokeDoki" customModuleProvider="target" sceneMemberID="viewController">
+                    <view key="view" contentMode="scaleToFill" id="ggK-Tt-YRs">
+                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <viewLayoutGuide key="safeArea" id="hGy-36-sUv"/>
+                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="ulM-Jo-cjM" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="772" y="50"/>
+        </scene>
     </scenes>
     <resources>
         <systemColor name="systemBackgroundColor">

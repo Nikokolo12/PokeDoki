@@ -15,7 +15,7 @@ struct PokemonListInfo: Codable {
 
 struct PokemonSection: Codable, Hashable { // aka Results
     let name: String
-    let url: String = ""
+    var url: String
     
     let id = UUID()
     
@@ -52,16 +52,3 @@ class JSONNull: Codable, Hashable {
         try container.encodeNil()
     }
 }
-
-//struct PokemonSection: Hashable{
-//    var name: String
-//    let id = UUID()
-//
-//    func hash(into hasher: inout Hasher) {
-//        hasher.combine(self.id)
-//    }
-//
-//    static func == (lhs: PokemonSection, rhs: PokemonSection) -> Bool {
-//        return lhs.id == rhs.id
-//    }
-//}
