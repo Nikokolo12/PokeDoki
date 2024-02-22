@@ -13,7 +13,7 @@ class PokemonCell: UITableViewCell {
         var label = UILabel()
         label.text = "Pokemon"
         label.translatesAutoresizingMaskIntoConstraints = false
-        label.font = UIFont.systemFont(ofSize: 16, weight: .semibold)
+        label.font = UIFont.systemFont(ofSize: 16, weight: .bold)
         return label
     }()
     
@@ -26,22 +26,11 @@ class PokemonCell: UITableViewCell {
                     nameLabel.trailingAnchor.constraint(equalTo: contentView.trailingAnchor, constant: -16),
                     nameLabel.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: -8)
                 ])
+
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
     
-}
-struct PokemonSection: Hashable{
-    let name: String
-    let id = UUID()
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
-    }
-    
-    static func == (lhs: PokemonSection, rhs: PokemonSection) -> Bool {
-        return lhs.id == rhs.id
-    }
 }
