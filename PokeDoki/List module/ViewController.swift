@@ -35,6 +35,18 @@ class ViewController: UIViewController {
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor)
         ])
+        
+        apiCaller.fetchPokeData(pagination: false){ [weak self] result in
+            switch result {
+            case .success(let someData):
+                self?.pokeNames.append(contentsOf: someData)
+                DispatchQueue.main.async {
+                    self?.applySnapshot()
+                }
+            case .failure(_):
+                print("Error with fetching")
+            }
+        }
     }
     
     override func viewDidLayoutSubviews() {

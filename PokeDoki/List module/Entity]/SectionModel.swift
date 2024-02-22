@@ -10,8 +10,6 @@ import UIKit
 
 struct PokemonListInfo: Codable {
     let count: Int
-    let next: String?
-    let previous: JSONNull?
     let results: [PokemonSection]
 }
 

@@ -8,24 +8,22 @@
 import Foundation
 
 class APICaller{
-    let apiUrl = "https://pokeapi.co/api/v2/pokemon"
-    var curentIndex : Int = 0
-    var numberArray = Array(1...42)
-    var fetchingMore = false
-    var isPaginating: Bool = false
+    // private let apiUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=40"
+    private var baseURL = "https://pokeapi.co/api/v2/pokemon"
+    private var offset = 0
+    private var limit = 6
+    var isPaginating = false
     
     func fetchPokeData(pagination: Bool, completion: @escaping (Result<[PokemonSection], Error>) -> Void){
         if (pagination) {
             isPaginating = true
         }
-        guard let url = URL(string: apiUrl) else {
-            print("Invalid URL")
-            return
-        }
+        
+        let url = modifyURL()
         var someData: [PokemonSection] = []
-        var newData: [PokemonSection] = [PokemonSection(name: "Pikachu")]
-        DispatchQueue.global().asyncAfter(deadline: .now() + 1) { [self] in
-            
+
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
+
             let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
                 guard let data = data, error == nil else {
                     print("Error: \(error?.localizedDescription ?? "Unknown error")")
@@ -34,10 +32,8 @@ class APICaller{
                 do {
                     let pokemonList = try JSONDecoder().decode(PokemonListInfo.self, from: data)
                     someData = pokemonList.results
-//                    if let next = pokemonList.next {
-//                        newData =
-//                    }
-                    completion(.success(pagination ? newData : someData))
+
+                    completion(.success(someData))
                     if (pagination) {
                         self?.isPaginating = false
                     }
@@ -45,11 +41,24 @@ class APICaller{
                     print("Error decoding data: \(error.localizedDescription)")
                 }
             }
-            
+
             task.resume()
         }
     }
     
+    func modifyURL() -> URL{
+        guard URL(string: baseURL) != nil else {fatalError("Failed to construct URL")}
+        if offset >= 1302 { fatalError("Failed to construct URL")}
+        guard var components = URLComponents(string: baseURL) else{ fatalError("Failed to construct URL") }
+        components.queryItems = [
+            URLQueryItem(name: "offset", value: "\(offset)"),
+            URLQueryItem(name: "limit", value: "\(limit)")
+        ]
+        offset += 20
+        guard let newURL = components.url else {
+            fatalError("Failed to construct URL")
+        }
+        return newURL
+    }
 }
-
 
