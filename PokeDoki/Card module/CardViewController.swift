@@ -9,6 +9,13 @@ import UIKit
 
 class CardViewController: UIViewController {
     
+    private var cardAPICaller = CardAPI()
+    var name = "Pokemon"
+    var type: [String] = ["Pokemon"]
+    var weight = 0
+    var height = 0
+    var image: UIImage?
+    
     var pokeImageView: UIImageView = {
         var image = UIImage(named: "Question")!
         var imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 180, height: 180))
@@ -40,6 +47,7 @@ class CardViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        self.title = "Pokemon"
         
         let xCoord = (view.bounds.width - pokeImageView.bounds.width) / 2
         pokeImageView.frame = CGRect(x: xCoord, y: 90, width: pokeImageView.bounds.width + 20, height: pokeImageView.bounds.height + 20)
@@ -63,7 +71,9 @@ class CardViewController: UIViewController {
         view.addSubview(weightLabel)
         view.addSubview(heightLabel)
     }
-    
+    func updateLabels(){
+        
+    }
     func addRainbowBorder(to view: UIView) {
         let gradientLayer = CAGradientLayer()
         gradientLayer.frame = view.bounds
@@ -83,5 +93,27 @@ class CardViewController: UIViewController {
         view.layer.addSublayer(gradientLayer)
         view.layer.masksToBounds = true
         view.layer.insertSublayer(view.layer.sublayers?.first ?? CALayer(), above: gradientLayer)
-    }
+    }    
+    
 }
+
+extension CardViewController: PokeInfo{
+    func sendData(name: String, num: Int) {
+        self.nameLabel.text = name
+        cardAPICaller.sendData(num: num) { [weak self] result in
+            switch result{
+            case .success(let data):
+                DispatchQueue.main.async {
+                    guard let self = self else {return }
+                    self.weight = data.weight
+                    print("The weight is \(self.weight)")
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    
+}
+

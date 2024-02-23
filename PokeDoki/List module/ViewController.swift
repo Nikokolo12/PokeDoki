@@ -8,6 +8,8 @@
 import UIKit
 
 class ViewController: UIViewController {
+    var delegate: PokeInfo?
+    
     var pokemons: [PokemonSection] = []
     private let apiCaller = APICaller()
     private var tableView: UITableView = {
@@ -84,12 +86,18 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Selected \(pokemons[indexPath.row])")
+        
         let cardViewController = CardViewController()
-        self.navigationController?.pushViewController(cardViewController, animated: true)
-        present(cardViewController, animated: true)
+        let navigationController = UINavigationController(rootViewController: cardViewController)
+        navigationController.modalPresentationStyle = .fullScreen
+        
+        let name = pokemons[indexPath.row].name
+        delegate?.sendData(name: name, num: indexPath.row)
+        present(navigationController, animated: true)
     }
     
 }
+
 
 extension ViewController: UIScrollViewDelegate {
     

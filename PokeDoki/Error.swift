@@ -14,3 +14,4 @@ enum APIErrors: Error{
     case decodingError
     case invalidOffset
 }
+

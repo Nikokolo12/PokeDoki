@@ -13,7 +13,7 @@ struct PokemonListInfo: Codable {
     let results: [PokemonSection]
 }
 
-struct PokemonSection: Codable, Hashable { // aka Results
+struct PokemonSection: Codable, Hashable {
     let name: String
     var url: String
     
