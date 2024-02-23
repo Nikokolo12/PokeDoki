@@ -84,6 +84,9 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Selected \(pokemons[indexPath.row])")
+        let cardViewController = CardViewController()
+        self.navigationController?.pushViewController(cardViewController, animated: true)
+        present(cardViewController, animated: true)
     }
     
 }
