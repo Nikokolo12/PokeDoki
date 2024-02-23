@@ -55,7 +55,7 @@ class APICaller{
             URLQueryItem(name: "offset", value: "\(offset)"),
             URLQueryItem(name: "limit", value: "\(limit)")
         ]
-        offset += 20
+        offset += 6
         guard let newURL = components.url else {
             throw APIErrors.invalidURL
         }

@@ -94,7 +94,7 @@ extension ViewController: UITableViewDelegate{
         
         delegate = cardViewController
         let name = pokemons[indexPath.row].name
-        delegate?.sendData(name: name, num: indexPath.row)
+        delegate?.sendData(name: name, num: indexPath.row+1)
         present(navigationController, animated: true)
     }
     

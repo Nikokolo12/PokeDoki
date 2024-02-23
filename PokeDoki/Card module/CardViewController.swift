@@ -55,7 +55,7 @@ class CardViewController: UIViewController {
         nameLabel.frame = CGRect(x: 20, y: pokeImageView.frame.maxY + 20, width: view.bounds.width - 40, height: 30)
         nameLabel.textAlignment = .center
         nameLabel.text = "\(name.uppercased())"
-
+        nameLabel.font = UIFont(name: "Thonburi-Bold", size: 25)
         typeLabel.frame = CGRect(x: 20, y: nameLabel.frame.maxY + 20, width: view.bounds.width - 40, height: 30)
         typeLabel.textAlignment = .center
         typeLabel.text = type.joined(separator: ", ")
@@ -82,8 +82,8 @@ extension CardViewController: PokeInfo {
             case .success(let data):
                 DispatchQueue.main.async {
                     guard let self = self else {return }
-                    self.weight = Double(data.weight) * Constants.kg
-                    self.height = round((Double(data.height) * Constants.cm) * 10)/10
+                    self.weight = Double(data.weight/10)
+                    self.height = Double(data.height*10)
                     self.image = data.image
                     self.type = data.types
                     

@@ -10,9 +10,9 @@ import UIKit
 
 class CardAPI{
     typealias pokeInfo = (weight: Int, height: Int, types: [String], image: UIImage)
-    private var index = 1
+    private var index = 0
     private var url: String {
-        return "https://pokeapi.co/api/v2/pokemon/\(index)"
+        return "https://pokeapi.co/api/v2/pokemon/\(index)/"
     }
     private var types: [String]? = []
     private var weight: Int?
