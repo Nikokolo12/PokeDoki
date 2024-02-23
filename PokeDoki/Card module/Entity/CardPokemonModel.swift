@@ -23,11 +23,9 @@ struct Sprites: Codable {
 }
 
 struct TypeElement: Codable {
-    let slot: Int
     let type: TypeType
 }
 
 struct TypeType: Codable {
     let name: String
-    let url: String
 }

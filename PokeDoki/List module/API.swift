@@ -8,7 +8,7 @@
 import Foundation
 
 class APICaller{
-    // private let apiUrl = "https://pokeapi.co/api/v2/pokemon?offset=0&limit=40"
+    
     private var baseURL = "https://pokeapi.co/api/v2/pokemon"
     private var offset = 0
     private var limit = 6
@@ -21,8 +21,6 @@ class APICaller{
         do{
             let url = try modifyURL()
             var someData: [PokemonSection] = []
-            
-            DispatchQueue.main.asyncAfter(deadline: .now() + 1) { [self] in
                 
                 let task = URLSession.shared.dataTask(with: url) { [weak self] (data, response, error) in
                     guard let data = data, error == nil else {
@@ -43,7 +41,6 @@ class APICaller{
                 }
                 
                 task.resume()
-            }
         }
         catch {
             completion(.failure(.invalidURL))
@@ -52,7 +49,7 @@ class APICaller{
     
     func modifyURL() throws -> URL{
         guard URL(string: baseURL) != nil else { throw APIErrors.invalidURL }
-        if offset >= 1302 { throw APIErrors.invalidOffset }
+        if offset >= Constants.numPokemons { throw APIErrors.invalidOffset }
         guard var components = URLComponents(string: baseURL) else { throw APIErrors.invalidURL}
         components.queryItems = [
             URLQueryItem(name: "offset", value: "\(offset)"),

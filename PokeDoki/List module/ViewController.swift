@@ -10,7 +10,7 @@ import UIKit
 class ViewController: UIViewController {
     var delegate: PokeInfo?
     
-    var pokemons: [PokemonSection] = []
+    private var pokemons: [PokemonSection] = []
     private let apiCaller = APICaller()
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -89,8 +89,10 @@ extension ViewController: UITableViewDelegate{
         
         let cardViewController = CardViewController()
         let navigationController = UINavigationController(rootViewController: cardViewController)
+        cardViewController.modalPresentationStyle = .fullScreen
         navigationController.modalPresentationStyle = .fullScreen
         
+        delegate = cardViewController
         let name = pokemons[indexPath.row].name
         delegate?.sendData(name: name, num: indexPath.row)
         present(navigationController, animated: true)
