@@ -14,6 +14,7 @@ protocol CardRouterProtocol: AnyObject{
 
 class CardRouter: CardRouterProtocol{
     weak var viewController: CardViewController!
+    
     init(viewController: CardViewController) {
         self.viewController = viewController
     }

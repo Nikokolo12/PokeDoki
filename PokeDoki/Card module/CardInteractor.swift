@@ -15,8 +15,7 @@ protocol CardInteractorProtocol{
 
 class CardInteractor: CardInteractorProtocol{
     
-    var presenter: CardPresenterProtocol!
-    
+    var presenter: CardPresenterProtocol?
     let apiService: CardAPIServiceProtocol = CardAPIService()
     
     required init(presenter: CardPresenterProtocol) {
@@ -24,7 +23,7 @@ class CardInteractor: CardInteractorProtocol{
     }
     
     func openUrl(num: Int, completion: @escaping (pokeInfo) -> Void) {
-        apiService.sendData(num: num) { [weak self] result in
+        apiService.sendData(num: num) { result in
             switch result {
             case .success(let data):
                 DispatchQueue.main.async {

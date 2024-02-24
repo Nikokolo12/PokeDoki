@@ -7,7 +7,7 @@
 
 import Foundation
 
-protocol APICallerProtocol: class {
+protocol APICallerProtocol: AnyObject {
     var baseURL: String { get }
     func openUrl(with urlString: String)
 }
@@ -16,7 +16,7 @@ class APICaller{
     
     var baseURL = "https://pokeapi.co/api/v2/pokemon"
     private var offset = 0
-    private var limit = 6
+    private var limit = 21
     var isPaginating = false
     
     func fetchPokeData(pagination: Bool, completion: @escaping (Result<[PokemonSection], APIErrors>) -> Void){
@@ -60,7 +60,7 @@ class APICaller{
             URLQueryItem(name: "offset", value: "\(offset)"),
             URLQueryItem(name: "limit", value: "\(limit)")
         ]
-        offset += 6
+        offset += 21
         guard let newURL = components.url else {
             throw APIErrors.invalidURL
         }

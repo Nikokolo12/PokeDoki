@@ -30,11 +30,11 @@ class CardAPIService: CardAPIServiceProtocol{
             guard let self = self else { return }
             switch result {
             case .success:
-                let tuple:pokeInfo = (self.weight!, self.height!, self.types!, self.image!)
+                let tuple: pokeInfo = (self.weight!, self.height!, self.types!, self.image!)
                 completion(.success(tuple))
             case .failure(let error):
                 print("Error: \(error)")
-                completion(.failure(error))
+                completion(.failure(.noData))
             }
         }
     }

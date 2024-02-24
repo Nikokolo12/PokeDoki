@@ -11,8 +11,8 @@ import UIKit
 typealias pokeInfo = (weight: Double, height: Double, types: [String], image: UIImage)
 
 enum Constants{
-    static let pokeHeight = 10
-    static let pokeWeight = 10
+    static let pokeHeight = 10.0
+    static let pokeWeight = 10.0
     static let numPokemons = 1302
 }
 

@@ -15,7 +15,7 @@ protocol ListInteractorProtocol{
 class ListInteractor: ListInteractorProtocol{
 
     private var pokemons: [PokemonSection] = []
-    weak var presenter: ListPresenterProtocol!
+    weak var presenter: ListPresenterProtocol?
     var apiService = APICaller()
     var urlSource: String {
         get {
@@ -33,10 +33,11 @@ class ListInteractor: ListInteractorProtocol{
             case .success(let someData):
                 let names = someData.map(\.name)
                 completion(names)
-            case .failure(_):
-                print("Error with fetching")
+            case .failure(let error):
+                print("Error with fetching: \(error)")
                 completion([])
             }
         }
     }
+    
 }

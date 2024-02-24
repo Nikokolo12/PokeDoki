@@ -13,23 +13,17 @@ protocol ListViewProtocol: AnyObject {
 
 class ViewController: UIViewController, ListViewProtocol {
     
-    func setURLCellTitle(names: [String]) {
-        pokemons.append(contentsOf: names)
-        DispatchQueue.main.async {
-            self.applySnapshot()
-        }
-    }
-    
-    var presenter: ListPresenterProtocol!
-    let configurator = ListConfigurator()
-    
     private var pokemons: [String] = []
-    private let apiCaller = APICaller()
+    private let apiCaller = APICaller()// TODO: remove
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
         return tableView
     }()
+    
+    var presenter: ListPresenterProtocol!
+    let configurator = ListConfigurator()
+    
     lazy var dataSource = createDiffableDataSource(tableView)
     enum ViewControllerSection: Hashable{
         case main
@@ -44,6 +38,7 @@ class ViewController: UIViewController, ListViewProtocol {
         tableView.delegate = self
         tableView.dataSource = dataSource
         view.addSubview(tableView)
+        setURLCellTitle(names: pokemons)
         applySnapshot()
         
         NSLayoutConstraint.activate([
@@ -57,19 +52,13 @@ class ViewController: UIViewController, ListViewProtocol {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        setURLCellTitle(names: pokemons)
-        //self.setURLCellTitle(names: pokemons)
-        //        apiCaller.fetchPokeData(pagination: false){ [weak self] result in
-        //            switch result {
-        //            case .success(let someData):
-        //                self?.pokemons.append(contentsOf: someData)
-        //                DispatchQueue.main.async {
-        //                    self?.applySnapshot()
-        //                }
-        //            case .failure(_):
-        //                print("Error with fetching")
-        //            }
-        //        }
+    }
+    
+    func setURLCellTitle(names: [String]) {
+        pokemons.append(contentsOf: names)
+        DispatchQueue.main.async {
+            self.applySnapshot()
+        }
     }
     
     private func createDiffableDataSource(_ tableView: UITableView) -> UITableViewDiffableDataSource<ViewControllerSection, String> {
@@ -108,33 +97,16 @@ extension ViewController: UITableViewDelegate{
     
 }
 
-
 extension ViewController: UIScrollViewDelegate {
     
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         let position = scrollView.contentOffset.y
         if (position > self.tableView.contentSize.height - scrollView.frame.size.height - 20) {
-            guard !apiCaller.isPaginating else { return }
             self.tableView.tableFooterView = createLoadingSpinerFooter()
-            setURLCellTitle(names: pokemons)
             DispatchQueue.main.async {
                 self.tableView.tableFooterView = nil
             }
-            setURLCellTitle(names: pokemons)
-            //            apiCaller.fetchPokeData(pagination: true) { [weak self] result in
-            //                DispatchQueue.main.async {
-            //                    self?.tableView.tableFooterView = nil
-            //                }
-            //                switch result {
-            //                case .success(let newData):
-            //                    self?.pokemons.append(contentsOf: newData)
-            //                    DispatchQueue.main.async {
-            //                        self?.applySnapshot()
-            //                    }
-            //                case .failure(_):
-            //                    print("Error with fetching")
-            //                }
-            //            }
+            presenter.didScrollView()
         }
     }
 }

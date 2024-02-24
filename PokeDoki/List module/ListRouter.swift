@@ -12,8 +12,9 @@ protocol ListRouterProtocol{
 }
 
 class ListRouter: ListRouterProtocol{
-    weak var viewController: ViewController!
-    var delegate: PokeInfo?
+    weak var viewController: ViewController?
+    var delegate: CardPresenterProtocol?
+    
     init(viewController: ViewController) {
         self.viewController = viewController
     }
@@ -22,11 +23,11 @@ class ListRouter: ListRouterProtocol{
         
         let cardViewController = CardViewController()
         let navigationController = UINavigationController(rootViewController: cardViewController)
-        cardViewController.modalPresentationStyle = .fullScreen
-        
-        delegate = cardViewController.presenter as? PokeInfo
-        delegate?.sendData(name: name, num: num)
-        viewController.dismiss(animated: true, completion: nil)
-        navigationController.pushViewController(cardViewController,animated: true)
+        //navigationController.pushViewController(cardViewController,animated: true)
+        navigationController.modalPresentationStyle = .fullScreen
+        viewController?.present(navigationController, animated: true, completion: { [weak self] in
+                self?.delegate = cardViewController.presenter
+                self?.delegate?.sendData(name: name, num: num)
+        })
     }
 }

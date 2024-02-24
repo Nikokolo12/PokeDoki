@@ -7,35 +7,43 @@
 
 import Foundation
 
-protocol ListPresenterProtocol: class{
-    var router: ListRouterProtocol! {get set}
+protocol ListPresenterProtocol: AnyObject{
+    var router: ListRouterProtocol? {get set}
     var pokemonNames: [String] {get set}
     func cellClicked(name: String, num: Int)
     func configureView()
+    func didScrollView()
 }
 
-class ListPresenter: ListPresenterProtocol{
+class ListPresenter: ListPresenterProtocol {
+    
     var pokemonNames: [String] = []
-    var router: ListRouterProtocol!
-    var interactor: ListInteractorProtocol!
-    weak var view: ListViewProtocol!
+    var router: ListRouterProtocol?
+    var interactor: ListInteractorProtocol?
+    weak var view: ListViewProtocol?
     
     required init(view: ListViewProtocol) {
-            self.view = view
-        }
+        self.view = view
+    }
     
     func cellClicked(name: String, num: Int) {
-        
-        router.closeCurrentViewController(name: name, num: num)
+        router?.closeCurrentViewController(name: name, num: num)
     }
     
     func configureView() {
-        interactor.openUrl { names in
-            self.pokemonNames.append(contentsOf: names)
-            print("the names \(self.pokemonNames)")
+        updateData { [weak self] names in
+            self?.view?.setURLCellTitle(names: names)
         }
-        print(self.pokemonNames)
-        view.setURLCellTitle(names: self.pokemonNames)
+    }
+    func didScrollView() {
+        updateData { [weak self] names in
+            self?.view?.setURLCellTitle(names: names)
+        }
     }
     
+    private func updateData(completion: @escaping ([String]) -> Void) {
+        interactor?.openUrl { names in
+            completion(names)
+        }
+    }
 }

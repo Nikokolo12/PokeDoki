@@ -9,36 +9,39 @@ import Foundation
 import UIKit
 
 protocol CardPresenterProtocol: AnyObject{
-    var router: CardRouterProtocol! {get set}
+    var router: CardRouterProtocol? {get set}
     func configureCardView()
     func closeButtonClicked()
-    
+    func sendData(name: String, num: Int)
 }
 
-class CardPresenter: CardPresenterProtocol, PokeInfo{
+class CardPresenter: CardPresenterProtocol{
     private var name = "Pokemon"
     private var pokemonData: pokeInfo = (0.0, 0.0, [], UIImage(named: "Question")!)
     
-    weak var view: CardViewProtocol!
-    var router: CardRouterProtocol!
-    var interactor: CardInteractorProtocol!
+    weak var view: CardViewProtocol?
+    var router: CardRouterProtocol?
+    var interactor: CardInteractorProtocol?
+    
     required init(view: CardViewProtocol) {
         self.view = view
     }
+    
     func closeButtonClicked() {
-        router.closeCurrentViewController()
+        router?.closeCurrentViewController()
     }
     
     func configureCardView() {
-        view.initComponents(tuple: self.pokemonData, name: self.name)
+        view?.configureComponents(tuple: self.pokemonData, name: self.name)
     }
     
     func sendData(name: String, num: Int) {
         self.name = name
-        interactor.openUrl(num: num) { data in
+        interactor?.openUrl(num: num) { data in
             self.pokemonData = data
-            self.pokemonData.0 /= 10
-            self.pokemonData.1 *= 10
+            self.pokemonData.0 /= Constants.pokeWeight
+            self.pokemonData.1 *= Constants.pokeHeight
+            self.configureCardView()
         }
     }
 }

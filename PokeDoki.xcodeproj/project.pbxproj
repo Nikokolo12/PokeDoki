@@ -31,7 +31,6 @@
 		239ADF2D2B8622B80020B467 /* PokeDokiUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239ADF2C2B8622B80020B467 /* PokeDokiUITests.swift */; };
 		239ADF2F2B8622B80020B467 /* PokeDokiUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239ADF2E2B8622B80020B467 /* PokeDokiUITestsLaunchTests.swift */; };
 		23FC5A512B87F62300F32E9E /* CardViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FC5A502B87F62300F32E9E /* CardViewController.swift */; };
-		23FC5A562B88D92D00F32E9E /* Protocols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FC5A552B88D92D00F32E9E /* Protocols.swift */; };
 		23FC5A5A2B88E77500F32E9E /* CardPokemonModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23FC5A592B88E77500F32E9E /* CardPokemonModel.swift */; };
 /* End PBXBuildFile section */
 
@@ -81,7 +80,6 @@
 		239ADF2C2B8622B80020B467 /* PokeDokiUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeDokiUITests.swift; sourceTree = "<group>"; };
 		239ADF2E2B8622B80020B467 /* PokeDokiUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PokeDokiUITestsLaunchTests.swift; sourceTree = "<group>"; };
 		23FC5A502B87F62300F32E9E /* CardViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardViewController.swift; path = "PokeDoki/Card module/CardViewController.swift"; sourceTree = SOURCE_ROOT; };
-		23FC5A552B88D92D00F32E9E /* Protocols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Protocols.swift; sourceTree = "<group>"; };
 		23FC5A592B88E77500F32E9E /* CardPokemonModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPokemonModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -151,7 +149,6 @@
 			children = (
 				239ADF0B2B8622AE0020B467 /* AppDelegate.swift */,
 				239ADF0D2B8622AE0020B467 /* SceneDelegate.swift */,
-				23FC5A552B88D92D00F32E9E /* Protocols.swift */,
 				23117A032B87F09B00C95618 /* Error.swift */,
 				235F5F4F2B8932BF0037FD2A /* Constants.swift */,
 				239ADF7E2B86AF890020B467 /* Card module */,
@@ -344,7 +341,6 @@
 				235F5F982B8A1F8D0037FD2A /* ListConfigurator.swift in Sources */,
 				235F5F962B8A1A450037FD2A /* ListInteractor.swift in Sources */,
 				239ADF0C2B8622AE0020B467 /* AppDelegate.swift in Sources */,
-				23FC5A562B88D92D00F32E9E /* Protocols.swift in Sources */,
 				235F5F9C2B8A4FE60037FD2A /* CardPresenter.swift in Sources */,
 				23FC5A5A2B88E77500F32E9E /* CardPokemonModel.swift in Sources */,
 				23FC5A512B87F62300F32E9E /* CardViewController.swift in Sources */,
