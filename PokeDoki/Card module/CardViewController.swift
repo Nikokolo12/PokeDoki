@@ -15,7 +15,7 @@ class BaseLabel: UILabel{
 
 class CardViewController: UIViewController {
 
-    private var cardAPICaller = CardAPI()
+    private var cardAPICaller = CardAPIService()
     private var name = "Pokemon"
     private var type: [String] = ["Pokemon"]
     private var weight = 0.0

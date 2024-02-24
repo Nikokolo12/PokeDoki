@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class CardAPI{
+class CardAPIService{
     typealias pokeInfo = (weight: Int, height: Int, types: [String], image: UIImage)
     private var index = 0
     private var url: String {

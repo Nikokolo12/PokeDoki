@@ -2,7 +2,7 @@
 //  PokemonCell.swift
 //  PokeDoki
 //
-//  Created by Soto Nicole on 21.02.24.
+//  Created by Soto Nicole on 24.02.24.
 //
 
 import UIKit

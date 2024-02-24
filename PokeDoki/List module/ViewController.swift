@@ -2,15 +2,29 @@
 //  ViewController.swift
 //  PokeDoki
 //
-//  Created by Soto Nicole on 21.02.24.
+//  Created by Soto Nicole on 24.02.24.
 //
 
 import UIKit
 
-class ViewController: UIViewController {
+protocol ListViewProtocol: AnyObject {
+    func setURLCellTitle(names: [String])
+}
+
+class ViewController: UIViewController, ListViewProtocol {
+    
+    func setURLCellTitle(names: [String]) {
+        pokemons.append(contentsOf: names)
+        DispatchQueue.main.async {
+            self.applySnapshot()
+        }
+    }
+    
+    var presenter: ListPresenterProtocol!
+    let configurator = ListConfigurator()
     var delegate: PokeInfo?
     
-    private var pokemons: [PokemonSection] = []
+    private var pokemons: [String] = []
     private let apiCaller = APICaller()
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
@@ -24,6 +38,8 @@ class ViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configurator.configure(viewController: self)
+        presenter.configureView()
         
         tableView.register(PokemonCell.self, forCellReuseIdentifier: PokemonCell.identifier)
         tableView.delegate = self
@@ -42,32 +58,33 @@ class ViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-
-        apiCaller.fetchPokeData(pagination: false){ [weak self] result in
-            switch result {
-            case .success(let someData):
-                self?.pokemons.append(contentsOf: someData)
-                DispatchQueue.main.async {
-                    self?.applySnapshot()
-                }
-            case .failure(_):
-                print("Error with fetching")
-            }
-        }
+        setURLCellTitle(names: pokemons)
+        //self.setURLCellTitle(names: pokemons)
+        //        apiCaller.fetchPokeData(pagination: false){ [weak self] result in
+        //            switch result {
+        //            case .success(let someData):
+        //                self?.pokemons.append(contentsOf: someData)
+        //                DispatchQueue.main.async {
+        //                    self?.applySnapshot()
+        //                }
+        //            case .failure(_):
+        //                print("Error with fetching")
+        //            }
+        //        }
     }
     
-    private func createDiffableDataSource(_ tableView: UITableView) -> UITableViewDiffableDataSource<ViewControllerSection, PokemonSection> {
-        let dataSource = UITableViewDiffableDataSource<ViewControllerSection, PokemonSection>(tableView: tableView) { tableView, indexPath, item in
+    private func createDiffableDataSource(_ tableView: UITableView) -> UITableViewDiffableDataSource<ViewControllerSection, String> {
+        let dataSource = UITableViewDiffableDataSource<ViewControllerSection, String>(tableView: tableView) { tableView, indexPath, item in
             guard let cell = tableView.dequeueReusableCell(withIdentifier: PokemonCell.identifier, for: indexPath) as? PokemonCell else { return UITableViewCell() }
             let pokemon = self.pokemons[indexPath.row]
-            cell.nameLabel.text = pokemon.name
+            cell.nameLabel.text = pokemon
             return cell
         }
         return dataSource
     }
     
     func applySnapshot() {
-        var snapshot = NSDiffableDataSourceSnapshot<ViewControllerSection, PokemonSection>()
+        var snapshot = NSDiffableDataSourceSnapshot<ViewControllerSection, String>()
         snapshot.appendSections([.main])
         snapshot.appendItems(pokemons, toSection: .main)
         dataSource.apply(snapshot, animatingDifferences: true)
@@ -86,6 +103,9 @@ class ViewController: UIViewController {
 extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         print("Selected \(pokemons[indexPath.row])")
+        let name = pokemons[indexPath.row]
+        presenter.cellClicked(name: name, num: indexPath.row+1)
+        
         
         let cardViewController = CardViewController()
         let navigationController = UINavigationController(rootViewController: cardViewController)
@@ -93,7 +113,6 @@ extension ViewController: UITableViewDelegate{
         navigationController.modalPresentationStyle = .fullScreen
         
         delegate = cardViewController
-        let name = pokemons[indexPath.row].name
         delegate?.sendData(name: name, num: indexPath.row+1)
         present(navigationController, animated: true)
     }
@@ -108,21 +127,27 @@ extension ViewController: UIScrollViewDelegate {
         if (position > self.tableView.contentSize.height - scrollView.frame.size.height - 20) {
             guard !apiCaller.isPaginating else { return }
             self.tableView.tableFooterView = createLoadingSpinerFooter()
-
-            apiCaller.fetchPokeData(pagination: true) { [weak self] result in
-                DispatchQueue.main.async {
-                    self?.tableView.tableFooterView = nil
-                }
-                switch result {
-                case .success(let newData):
-                    self?.pokemons.append(contentsOf: newData)
-                    DispatchQueue.main.async {
-                        self?.applySnapshot()
-                    }
-                case .failure(_):
-                    print("Error with fetching")
-                }
+            setURLCellTitle(names: pokemons)
+            DispatchQueue.main.async {
+                self.tableView.tableFooterView = nil
             }
+            setURLCellTitle(names: pokemons)
+            //            apiCaller.fetchPokeData(pagination: true) { [weak self] result in
+            //                DispatchQueue.main.async {
+            //                    self?.tableView.tableFooterView = nil
+            //                }
+            //                switch result {
+            //                case .success(let newData):
+            //                    self?.pokemons.append(contentsOf: newData)
+            //                    DispatchQueue.main.async {
+            //                        self?.applySnapshot()
+            //                    }
+            //                case .failure(_):
+            //                    print("Error with fetching")
+            //                }
+            //            }
         }
     }
 }
+
+

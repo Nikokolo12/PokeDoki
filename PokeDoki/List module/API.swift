@@ -1,15 +1,20 @@
 //
-//  API.swift
+//  APICaller.swift
 //  PokeDoki
 //
-//  Created by Soto Nicole on 22.02.24.
+//  Created by Soto Nicole on 24.02.24.
 //
 
 import Foundation
 
+protocol APICallerProtocol: class {
+    var baseURL: String { get }
+    func openUrl(with urlString: String)
+}
+
 class APICaller{
     
-    private var baseURL = "https://pokeapi.co/api/v2/pokemon"
+    var baseURL = "https://pokeapi.co/api/v2/pokemon"
     private var offset = 0
     private var limit = 6
     var isPaginating = false
