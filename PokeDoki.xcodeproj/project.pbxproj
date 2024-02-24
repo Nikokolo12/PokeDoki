@@ -18,6 +18,10 @@
 		235F5F942B8A1A310037FD2A /* ListRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235F5F932B8A1A310037FD2A /* ListRouter.swift */; };
 		235F5F962B8A1A450037FD2A /* ListInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235F5F952B8A1A450037FD2A /* ListInteractor.swift */; };
 		235F5F982B8A1F8D0037FD2A /* ListConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235F5F972B8A1F8D0037FD2A /* ListConfigurator.swift */; };
+		235F5F9A2B8A4FD40037FD2A /* CardInteractor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235F5F992B8A4FD40037FD2A /* CardInteractor.swift */; };
+		235F5F9C2B8A4FE60037FD2A /* CardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235F5F9B2B8A4FE60037FD2A /* CardPresenter.swift */; };
+		235F5F9E2B8A52590037FD2A /* CardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235F5F9D2B8A52590037FD2A /* CardRouter.swift */; };
+		235F5FA22B8A53870037FD2A /* CardConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235F5FA12B8A53860037FD2A /* CardConfigurator.swift */; };
 		239ADF0C2B8622AE0020B467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239ADF0B2B8622AE0020B467 /* AppDelegate.swift */; };
 		239ADF0E2B8622AE0020B467 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239ADF0D2B8622AE0020B467 /* SceneDelegate.swift */; };
 		239ADF132B8622AE0020B467 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 239ADF112B8622AE0020B467 /* Main.storyboard */; };
@@ -60,6 +64,10 @@
 		235F5F932B8A1A310037FD2A /* ListRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListRouter.swift; sourceTree = "<group>"; };
 		235F5F952B8A1A450037FD2A /* ListInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInteractor.swift; sourceTree = "<group>"; };
 		235F5F972B8A1F8D0037FD2A /* ListConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListConfigurator.swift; sourceTree = "<group>"; };
+		235F5F992B8A4FD40037FD2A /* CardInteractor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInteractor.swift; sourceTree = "<group>"; };
+		235F5F9B2B8A4FE60037FD2A /* CardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardPresenter.swift; path = "PokeDoki/List module/CardPresenter.swift"; sourceTree = SOURCE_ROOT; };
+		235F5F9D2B8A52590037FD2A /* CardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRouter.swift; sourceTree = "<group>"; };
+		235F5FA12B8A53860037FD2A /* CardConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardConfigurator.swift; sourceTree = "<group>"; };
 		239ADF082B8622AE0020B467 /* PokeDoki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeDoki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		239ADF0B2B8622AE0020B467 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		239ADF0D2B8622AE0020B467 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -192,7 +200,11 @@
 			isa = PBXGroup;
 			children = (
 				235F5F532B8935560037FD2A /* CardAPIService.swift */,
+				235F5F992B8A4FD40037FD2A /* CardInteractor.swift */,
 				23FC5A502B87F62300F32E9E /* CardViewController.swift */,
+				235F5F9B2B8A4FE60037FD2A /* CardPresenter.swift */,
+				235F5FA12B8A53860037FD2A /* CardConfigurator.swift */,
+				235F5F9D2B8A52590037FD2A /* CardRouter.swift */,
 				23117A022B87EA3E00C95618 /* Entity */,
 			);
 			path = "Card module";
@@ -333,10 +345,14 @@
 				235F5F962B8A1A450037FD2A /* ListInteractor.swift in Sources */,
 				239ADF0C2B8622AE0020B467 /* AppDelegate.swift in Sources */,
 				23FC5A562B88D92D00F32E9E /* Protocols.swift in Sources */,
+				235F5F9C2B8A4FE60037FD2A /* CardPresenter.swift in Sources */,
 				23FC5A5A2B88E77500F32E9E /* CardPokemonModel.swift in Sources */,
 				23FC5A512B87F62300F32E9E /* CardViewController.swift in Sources */,
+				235F5F9E2B8A52590037FD2A /* CardRouter.swift in Sources */,
 				23117A042B87F09C00C95618 /* Error.swift in Sources */,
 				235F5F8A2B8A106B0037FD2A /* PokemonCell.swift in Sources */,
+				235F5FA22B8A53870037FD2A /* CardConfigurator.swift in Sources */,
+				235F5F9A2B8A4FD40037FD2A /* CardInteractor.swift in Sources */,
 				235F5F862B8A0FF90037FD2A /* ViewController.swift in Sources */,
 				235F5F842B8A0FBA0037FD2A /* API.swift in Sources */,
 				235F5F942B8A1A310037FD2A /* ListRouter.swift in Sources */,

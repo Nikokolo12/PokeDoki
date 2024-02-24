@@ -6,6 +6,9 @@
 //
 
 import Foundation
+import UIKit
+
+typealias pokeInfo = (weight: Double, height: Double, types: [String], image: UIImage)
 
 enum Constants{
     static let pokeHeight = 10

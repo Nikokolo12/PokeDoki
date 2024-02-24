@@ -22,7 +22,6 @@ class ViewController: UIViewController, ListViewProtocol {
     
     var presenter: ListPresenterProtocol!
     let configurator = ListConfigurator()
-    var delegate: PokeInfo?
     
     private var pokemons: [String] = []
     private let apiCaller = APICaller()
@@ -105,16 +104,6 @@ extension ViewController: UITableViewDelegate{
         print("Selected \(pokemons[indexPath.row])")
         let name = pokemons[indexPath.row]
         presenter.cellClicked(name: name, num: indexPath.row+1)
-        
-        
-        let cardViewController = CardViewController()
-        let navigationController = UINavigationController(rootViewController: cardViewController)
-        cardViewController.modalPresentationStyle = .fullScreen
-        navigationController.modalPresentationStyle = .fullScreen
-        
-        delegate = cardViewController
-        delegate?.sendData(name: name, num: indexPath.row+1)
-        present(navigationController, animated: true)
     }
     
 }

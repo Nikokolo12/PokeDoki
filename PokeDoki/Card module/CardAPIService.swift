@@ -8,15 +8,20 @@
 import Foundation
 import UIKit
 
-class CardAPIService{
-    typealias pokeInfo = (weight: Int, height: Int, types: [String], image: UIImage)
+protocol CardAPIServiceProtocol {
+//index
+    func sendData(num: Int, completion: @escaping (Result<pokeInfo, APIErrors>) -> Void)
+}
+
+class CardAPIService: CardAPIServiceProtocol{
+    
     private var index = 0
-    private var url: String {
+    var url: String {
         return "https://pokeapi.co/api/v2/pokemon/\(index)/"
     }
     private var types: [String]? = []
-    private var weight: Int?
-    private var height: Int?
+    private var weight: Double?
+    private var height: Double?
     private var image: UIImage?
     
     func sendData(num: Int, completion: @escaping (Result<pokeInfo, APIErrors>) -> Void) {
@@ -25,7 +30,7 @@ class CardAPIService{
             guard let self = self else { return }
             switch result {
             case .success:
-                let tuple = (self.weight!, self.height!, self.types!, self.image!)
+                let tuple:pokeInfo = (self.weight!, self.height!, self.types!, self.image!)
                 completion(.success(tuple))
             case .failure(let error):
                 print("Error: \(error)")
@@ -47,8 +52,8 @@ class CardAPIService{
             do {
                 let pokeData = try? JSONDecoder().decode(CardPokemonModel.self, from: data)
                 self.types = pokeData?.types.map { $0.type.name }
-                self.weight = pokeData?.weight
-                self.height = pokeData?.height
+                self.weight = Double(pokeData!.weight)
+                self.height = Double(pokeData!.height)
                 
                 if let imageURL = URL(string: (pokeData?.sprites.frontDefault)!),
                    let imageData = try? Data(contentsOf: imageURL),

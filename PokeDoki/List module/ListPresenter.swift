@@ -26,7 +26,7 @@ class ListPresenter: ListPresenterProtocol{
     
     func cellClicked(name: String, num: Int) {
         
-        router.closeCurrentViewController()
+        router.closeCurrentViewController(name: name, num: num)
     }
     
     func configureView() {

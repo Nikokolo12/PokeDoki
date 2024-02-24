@@ -13,8 +13,14 @@ class BaseLabel: UILabel{
     }
 }
 
-class CardViewController: UIViewController {
+protocol CardViewProtocol: AnyObject{
+    func initComponents(tuple: pokeInfo, name: String)
+}
 
+class CardViewController: UIViewController, CardViewProtocol {
+
+    var presenter: CardPresenterProtocol!
+    let configurator = CardConfigurator()
     private var cardAPICaller = CardAPIService()
     private var name = "Pokemon"
     private var type: [String] = ["Pokemon"]
@@ -35,6 +41,9 @@ class CardViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        configurator.configure(viewController: self)
+        presenter.configureCardView()
+        
         navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Go back", style: .plain, target: self, action: #selector(dismissSelf))
         
         view.backgroundColor = .white
@@ -48,7 +57,16 @@ class CardViewController: UIViewController {
     }
     
     @objc private func dismissSelf(){
-        dismiss(animated: true, completion: nil)
+        presenter.closeButtonClicked()
+    }
+    
+    func initComponents(tuple: pokeInfo, name: String) {
+        self.weight = tuple.weight
+        self.height = tuple.height
+        self.image = tuple.image
+        self.type.append(contentsOf: tuple.types)
+        self.name = name
+        putComponents()
     }
     
     func putComponents() {
@@ -74,26 +92,4 @@ class CardViewController: UIViewController {
     }
 }
 
-extension CardViewController: PokeInfo {
-    func sendData(name: String, num: Int) {
-        self.name = name
-        cardAPICaller.sendData(num: num) { [weak self] result in
-            switch result{
-            case .success(let data):
-                DispatchQueue.main.async {
-                    guard let self = self else {return }
-                    self.weight = Double(data.weight/10)
-                    self.height = Double(data.height*10)
-                    self.image = data.image
-                    self.type = data.types
-                    
-                    self.putComponents()
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
-    }
-    
-    
-}
+
