@@ -37,12 +37,6 @@ class CardPresenter: CardPresenterProtocol{
     
     func sendData(name: String, num: Int) {
         self.name = name
-        //        interactor?.openUrl(num: num) { data in
-        //            self.pokemonData = data
-        //            self.pokemonData.0 /= Constants.pokeWeight
-        //            self.pokemonData.1 *= Constants.pokeHeight
-        //            self.configureCardView()
-        //        }
         interactor?.getPokemonItem(num: num, completion: { data in
             self.pokemonData = data
             self.pokemonData.0 /= Constants.pokeWeight
