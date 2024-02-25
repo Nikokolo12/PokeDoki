@@ -22,6 +22,9 @@
 		235F5F9C2B8A4FE60037FD2A /* CardPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235F5F9B2B8A4FE60037FD2A /* CardPresenter.swift */; };
 		235F5F9E2B8A52590037FD2A /* CardRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235F5F9D2B8A52590037FD2A /* CardRouter.swift */; };
 		235F5FA22B8A53870037FD2A /* CardConfigurator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235F5FA12B8A53860037FD2A /* CardConfigurator.swift */; };
+		235F5FE42B8B45D70037FD2A /* PokemonDataModel.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 235F5FE22B8B45D70037FD2A /* PokemonDataModel.xcdatamodeld */; };
+		235F600C2B8B87780037FD2A /* PokemonItem+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235F60082B8B87770037FD2A /* PokemonItem+CoreDataClass.swift */; };
+		235F600D2B8B87780037FD2A /* PokemonItem+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235F60092B8B87770037FD2A /* PokemonItem+CoreDataProperties.swift */; };
 		239ADF0C2B8622AE0020B467 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239ADF0B2B8622AE0020B467 /* AppDelegate.swift */; };
 		239ADF0E2B8622AE0020B467 /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 239ADF0D2B8622AE0020B467 /* SceneDelegate.swift */; };
 		239ADF132B8622AE0020B467 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 239ADF112B8622AE0020B467 /* Main.storyboard */; };
@@ -67,6 +70,9 @@
 		235F5F9B2B8A4FE60037FD2A /* CardPresenter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; name = CardPresenter.swift; path = "PokeDoki/List module/CardPresenter.swift"; sourceTree = SOURCE_ROOT; };
 		235F5F9D2B8A52590037FD2A /* CardRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardRouter.swift; sourceTree = "<group>"; };
 		235F5FA12B8A53860037FD2A /* CardConfigurator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardConfigurator.swift; sourceTree = "<group>"; };
+		235F5FE32B8B45D70037FD2A /* PokemonDataModel.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = PokemonDataModel.xcdatamodel; sourceTree = "<group>"; };
+		235F60082B8B87770037FD2A /* PokemonItem+CoreDataClass.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonItem+CoreDataClass.swift"; sourceTree = "<group>"; };
+		235F60092B8B87770037FD2A /* PokemonItem+CoreDataProperties.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "PokemonItem+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		239ADF082B8622AE0020B467 /* PokeDoki.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PokeDoki.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		239ADF0B2B8622AE0020B467 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		239ADF0D2B8622AE0020B467 /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -124,6 +130,15 @@
 			path = Entity;
 			sourceTree = "<group>";
 		};
+		235F5FED2B8B4AE10037FD2A /* PokemonItem */ = {
+			isa = PBXGroup;
+			children = (
+				235F60082B8B87770037FD2A /* PokemonItem+CoreDataClass.swift */,
+				235F60092B8B87770037FD2A /* PokemonItem+CoreDataProperties.swift */,
+			);
+			path = PokemonItem;
+			sourceTree = "<group>";
+		};
 		239ADEFF2B8622AE0020B467 = {
 			isa = PBXGroup;
 			children = (
@@ -147,6 +162,8 @@
 		239ADF0A2B8622AE0020B467 /* PokeDoki */ = {
 			isa = PBXGroup;
 			children = (
+				235F5FED2B8B4AE10037FD2A /* PokemonItem */,
+				235F5FE22B8B45D70037FD2A /* PokemonDataModel.xcdatamodeld */,
 				239ADF0B2B8622AE0020B467 /* AppDelegate.swift */,
 				239ADF0D2B8622AE0020B467 /* SceneDelegate.swift */,
 				23117A032B87F09B00C95618 /* Error.swift */,
@@ -347,11 +364,14 @@
 				235F5F9E2B8A52590037FD2A /* CardRouter.swift in Sources */,
 				23117A042B87F09C00C95618 /* Error.swift in Sources */,
 				235F5F8A2B8A106B0037FD2A /* PokemonCell.swift in Sources */,
+				235F600D2B8B87780037FD2A /* PokemonItem+CoreDataProperties.swift in Sources */,
+				235F5FE42B8B45D70037FD2A /* PokemonDataModel.xcdatamodeld in Sources */,
 				235F5FA22B8A53870037FD2A /* CardConfigurator.swift in Sources */,
 				235F5F9A2B8A4FD40037FD2A /* CardInteractor.swift in Sources */,
 				235F5F862B8A0FF90037FD2A /* ViewController.swift in Sources */,
 				235F5F842B8A0FBA0037FD2A /* API.swift in Sources */,
 				235F5F942B8A1A310037FD2A /* ListRouter.swift in Sources */,
+				235F600C2B8B87780037FD2A /* PokemonItem+CoreDataClass.swift in Sources */,
 				235F5F542B8935560037FD2A /* CardAPIService.swift in Sources */,
 				239ADF0E2B8622AE0020B467 /* SceneDelegate.swift in Sources */,
 				235F5F922B8A1A240037FD2A /* ListPresenter.swift in Sources */,
@@ -720,6 +740,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		235F5FE22B8B45D70037FD2A /* PokemonDataModel.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				235F5FE32B8B45D70037FD2A /* PokemonDataModel.xcdatamodel */,
+			);
+			currentVersion = 235F5FE32B8B45D70037FD2A /* PokemonDataModel.xcdatamodel */;
+			path = PokemonDataModel.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 239ADF002B8622AE0020B467 /* Project object */;
 }

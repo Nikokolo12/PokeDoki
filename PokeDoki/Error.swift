@@ -13,5 +13,6 @@ enum APIErrors: Error{
     case noData
     case decodingError
     case invalidOffset
+    case failedToSaveData
 }
 

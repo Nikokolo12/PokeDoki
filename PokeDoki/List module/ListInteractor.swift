@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import UIKit
 
 protocol ListInteractorProtocol{
     var urlSource: String { get }
@@ -13,8 +14,8 @@ protocol ListInteractorProtocol{
 }
 
 class ListInteractor: ListInteractorProtocol{
-
-    private var pokemons: [PokemonSection] = []
+    
+   // private var pokemons: [PokemonSection] = []
     weak var presenter: ListPresenterProtocol?
     var apiService = APICaller()
     var urlSource: String {

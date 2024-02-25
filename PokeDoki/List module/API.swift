@@ -23,7 +23,7 @@ class APICaller{
         if (pagination) {
             isPaginating = true
         }
-        do{
+        do {
             let url = try modifyURL()
             var someData: [PokemonSection] = []
                 

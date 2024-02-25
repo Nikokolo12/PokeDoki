@@ -13,18 +13,8 @@ struct PokemonListInfo: Codable {
     let results: [PokemonSection]
 }
 
-struct PokemonSection: Codable, Hashable {
+struct PokemonSection: Codable {
     let name: String
-    
-    let id = UUID()
-    
-    func hash(into hasher: inout Hasher) {
-        hasher.combine(self.id)
-    }
-    
-    static func == (lhs: PokemonSection, rhs: PokemonSection) -> Bool {
-        return lhs.id == rhs.id
-    }
 }
 
 
