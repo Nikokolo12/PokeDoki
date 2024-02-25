@@ -9,10 +9,10 @@ import Foundation
 
 protocol APICallerProtocol: AnyObject {
     var baseURL: String { get }
-    func openUrl(with urlString: String)
+    func fetchPokeData(pagination: Bool, completion: @escaping (Result<[PokemonSection], APIErrors>) -> Void)
 }
 
-class APICaller{
+class APICaller: APICallerProtocol{
     
     var baseURL = "https://pokeapi.co/api/v2/pokemon"
     private var offset = 0

@@ -48,8 +48,7 @@ class CardViewController: UIViewController, CardViewProtocol {
         activityIndicator.center = view.center
         activityIndicator.startAnimating()
         
-        let backButtonImage = UIImage(systemName: "chevron.left")
-        navigationItem.leftBarButtonItem = UIBarButtonItem(image: backButtonImage, style: .plain, target: self, action: #selector(dismissSelf))
+        navigationItem.leftBarButtonItem = UIBarButtonItem(title: "Go back", style: .plain, target: self, action: #selector(dismissSelf))
         navigationController?.navigationBar.tintColor = .systemRed
         view.backgroundColor = .white
         self.title = "Pokemon"

@@ -6,7 +6,6 @@
 //
 
 import Foundation
-// failed to get data error decoding data Failed to construct URL
 
 enum APIErrors: Error{
     case invalidURL

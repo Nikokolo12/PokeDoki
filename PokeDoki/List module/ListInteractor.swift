@@ -11,21 +11,21 @@ import UIKit
 protocol ListInteractorProtocol{
     var urlSource: String { get }
     func openUrl(completion: @escaping ([String]) -> Void)
+    var apiService: APICallerProtocol { get set }
 }
 
 class ListInteractor: ListInteractorProtocol{
-    
-   // private var pokemons: [PokemonSection] = []
+    var apiService: APICallerProtocol
     weak var presenter: ListPresenterProtocol?
-    var apiService = APICaller()
     var urlSource: String {
         get {
             apiService.baseURL
         }
     }
     
-    required init(presenter: ListPresenterProtocol) {
+    required init(presenter: ListPresenterProtocol, apiService: APICallerProtocol) {
         self.presenter = presenter
+        self.apiService = apiService
     }
     
     func openUrl(completion: @escaping ([String]) -> Void) {
@@ -42,3 +42,4 @@ class ListInteractor: ListInteractorProtocol{
     }
     
 }
+

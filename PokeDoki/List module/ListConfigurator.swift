@@ -14,7 +14,8 @@ protocol ListConfiguratorProtocol{
 class ListConfigurator: ListConfiguratorProtocol{
     func configure(viewController: ViewController) {
         let presenter = ListPresenter(view: viewController)
-        let interactor = ListInteractor(presenter: presenter)
+        let apiCaller = APICaller()
+        let interactor = ListInteractor(presenter: presenter, apiService: apiCaller )
         let router = ListRouter(viewController: viewController)
         
         viewController.presenter = presenter
