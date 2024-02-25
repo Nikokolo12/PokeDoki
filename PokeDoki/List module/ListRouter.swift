@@ -23,7 +23,7 @@ class ListRouter: ListRouterProtocol{
         
         let cardViewController = CardViewController()
         let navigationController = UINavigationController(rootViewController: cardViewController)
-        //navigationController.pushViewController(cardViewController,animated: true)
+        
         navigationController.modalPresentationStyle = .fullScreen
         viewController?.present(navigationController, animated: true, completion: { [weak self] in
                 self?.delegate = cardViewController.presenter

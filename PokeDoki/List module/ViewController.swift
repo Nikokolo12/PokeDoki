@@ -90,7 +90,6 @@ class ViewController: UIViewController, ListViewProtocol {
 
 extension ViewController: UITableViewDelegate{
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        print("Selected \(pokemons[indexPath.row])")
         let name = pokemons[indexPath.row]
         presenter.cellClicked(name: name, num: indexPath.row+1)
     }

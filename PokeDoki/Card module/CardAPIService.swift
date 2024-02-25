@@ -9,7 +9,7 @@ import Foundation
 import UIKit
 
 protocol CardAPIServiceProtocol {
-//index
+
     func sendData(num: Int, completion: @escaping (Result<pokeInfo, APIErrors>) -> Void)
 }
 
