@@ -19,7 +19,7 @@ class CardInteractor: CardInteractorProtocol {
     var modelPokemonItem: [PokemonItem] = []
     let context = (UIApplication.shared.delegate as! AppDelegate).persistentContainer.viewContext
     var presenter: CardPresenterProtocol?
-    let apiService: CardAPIServiceProtocol = CardAPIService()
+    var apiService: CardAPIServiceProtocol = CardAPIService()
     
     required init(presenter: CardPresenterProtocol) {
         self.presenter = presenter
@@ -41,7 +41,21 @@ class CardInteractor: CardInteractorProtocol {
         }
     }
     
-    func createPokemonItem(tuple: pokeInfo, index: Int64) {
+    func openUrl(num: Int, completion: @escaping (pokeInfo) -> Void) {
+        apiService.sendData(num: num) { result in
+            switch result {
+            case .success(let data):
+                DispatchQueue.main.async {
+                    self.createPokemonItem(tuple: (data.weight, data.height, data.types, data.image), index: Int64(exactly: num)!)
+                    completion((data.weight, data.height, data.types, data.image))
+                }
+            case .failure(let error):
+                print(error)
+            }
+        }
+    }
+    
+    private func createPokemonItem(tuple: pokeInfo, index: Int64) {
         let newPokemonItem = PokemonItem(context: context)
         newPokemonItem.weight = tuple.weight
         newPokemonItem.height = tuple.height
@@ -55,27 +69,13 @@ class CardInteractor: CardInteractorProtocol {
         }
     }
     
-    func convertToPokeInfo(pokemonItem: PokemonItem) -> pokeInfo {
+    private func convertToPokeInfo(pokemonItem: PokemonItem) -> pokeInfo {
         let weight: Double = pokemonItem.weight
         let height: Double = pokemonItem.height
         let image = UIImage(data: pokemonItem.image ?? Data()) ?? UIImage()
         let types = pokemonItem.types as? [String] ?? []
         
         return (weight, height, types, image)
-    }
-    
-    func openUrl(num: Int, completion: @escaping (pokeInfo) -> Void) {
-        apiService.sendData(num: num) { result in
-            switch result {
-            case .success(let data):
-                DispatchQueue.main.async {
-                    self.createPokemonItem(tuple: (data.weight, data.height, data.types, data.image), index: Int64(exactly: num)!)
-                    completion((data.weight, data.height, data.types, data.image))
-                }
-            case .failure(let error):
-                print(error)
-            }
-        }
     }
     
 }

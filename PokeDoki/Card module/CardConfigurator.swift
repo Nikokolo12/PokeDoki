@@ -12,7 +12,6 @@ protocol CardConfiguratorProtocol: AnyObject {
 }
 
 class CardConfigurator: CardConfiguratorProtocol {
-    
     func configure(viewController: CardViewController) {
         let presenter = CardPresenter(view: viewController)
         let interactor = CardInteractor(presenter: presenter)

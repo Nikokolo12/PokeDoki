@@ -9,7 +9,6 @@ import Foundation
 
 protocol CardRouterProtocol: AnyObject{
     func closeCurrentViewController()
-    
 }
 
 class CardRouter: CardRouterProtocol{

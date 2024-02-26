@@ -30,7 +30,7 @@ class ListInteractorTests: XCTestCase {
         super.tearDown()
     }
     
-    func testOpenUrl_Success() {
+    func test_openURL() {
         // given
         let expetedData = ["Bulbasaur", "Charmander", "Squirtle"]
         let testData = expetedData.map { PokemonSection(name: $0) }
@@ -46,53 +46,5 @@ class ListInteractorTests: XCTestCase {
         XCTAssertEqual(mockApi.invokedFetchPokeDataCount, 1)
         XCTAssertEqual(expetedData, resultData)
     }
-    
-    class MockPresenter: ListPresenterProtocol {
-        
-        var router: ListRouterProtocol?
-        
-        var pokemonNames: [String] = []
-        
-        func cellClicked(name: String, num: Int) {
-            
-        }
-        
-        func configureView() {
-            
-        }
-        
-        func didScrollView() {
-            
-        }
-        
-    }
-    
-    class MockAPICaller: APICallerProtocol {
-        var invokedBaseURLGetter = false
-        var invokedBaseURLGetterCount = 0
-        var stubbedBaseURL: String! = ""
-        
-        var baseURL: String {
-            invokedBaseURLGetter = true
-            invokedBaseURLGetterCount += 1
-            return stubbedBaseURL
-        }
-        
-        var invokedFetchPokeData = false
-        var invokedFetchPokeDataCount = 0
-        var invokedFetchPokeDataParameters: (pagination: Bool, Void)?
-        var invokedFetchPokeDataParametersList = [(pagination: Bool, Void)]()
-        var stubbedFetchPokeDataCompletionResult: (Result<[PokemonSection], APIErrors>, Void)?
-        
-        func fetchPokeData(pagination: Bool, completion: @escaping (Result<[PokemonSection], APIErrors>) -> Void) {
-            invokedFetchPokeData = true
-            invokedFetchPokeDataCount += 1
-            invokedFetchPokeDataParameters = (pagination, ())
-            invokedFetchPokeDataParametersList.append((pagination, ()))
-            if let result = stubbedFetchPokeDataCompletionResult {
-                completion(result.0)
-            }
-        }
-    }
-    
 }
+

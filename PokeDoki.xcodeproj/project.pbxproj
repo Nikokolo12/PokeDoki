@@ -7,7 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		230EF0B32B8C96F1005B537F /* CardMockClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230EF0B22B8C96F1005B537F /* CardMockClasses.swift */; };
+		230EF0BC2B8CABAC005B537F /* CardInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230EF0BB2B8CABAC005B537F /* CardInteractorTest.swift */; };
+		230EF0BE2B8CB9A0005B537F /* ListMockClasses.swift in Sources */ = {isa = PBXBuildFile; fileRef = 230EF0BD2B8CB9A0005B537F /* ListMockClasses.swift */; };
 		23117A042B87F09C00C95618 /* Error.swift in Sources */ = {isa = PBXBuildFile; fileRef = 23117A032B87F09B00C95618 /* Error.swift */; };
+		233E979C2B8C8CFE00D7E53E /* CardPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 233E979B2B8C8CFE00D7E53E /* CardPresenterTest.swift */; };
 		2354F18D2B8BF9A400B09B53 /* ListPresenterTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2354F18B2B8BF9A400B09B53 /* ListPresenterTest.swift */; };
 		2354F1912B8BFA7300B09B53 /* ListInteractorTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2354F18F2B8BFA7300B09B53 /* ListInteractorTest.swift */; };
 		235F5F502B8932BF0037FD2A /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 235F5F4F2B8932BF0037FD2A /* Constants.swift */; };
@@ -59,7 +63,11 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		230EF0B22B8C96F1005B537F /* CardMockClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardMockClasses.swift; sourceTree = "<group>"; };
+		230EF0BB2B8CABAC005B537F /* CardInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardInteractorTest.swift; sourceTree = "<group>"; };
+		230EF0BD2B8CB9A0005B537F /* ListMockClasses.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListMockClasses.swift; sourceTree = "<group>"; };
 		23117A032B87F09B00C95618 /* Error.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Error.swift; sourceTree = "<group>"; };
+		233E979B2B8C8CFE00D7E53E /* CardPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardPresenterTest.swift; sourceTree = "<group>"; };
 		2354F18B2B8BF9A400B09B53 /* ListPresenterTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListPresenterTest.swift; sourceTree = "<group>"; };
 		2354F18F2B8BFA7300B09B53 /* ListInteractorTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListInteractorTest.swift; sourceTree = "<group>"; };
 		235F5F4F2B8932BF0037FD2A /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -122,6 +130,15 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		230EF0B42B8C97F2005B537F /* MockClasses */ = {
+			isa = PBXGroup;
+			children = (
+				230EF0BD2B8CB9A0005B537F /* ListMockClasses.swift */,
+				230EF0B22B8C96F1005B537F /* CardMockClasses.swift */,
+			);
+			path = MockClasses;
+			sourceTree = "<group>";
+		};
 		23117A022B87EA3E00C95618 /* Entity */ = {
 			isa = PBXGroup;
 			children = (
@@ -133,8 +150,12 @@
 		2354F18E2B8BF9B100B09B53 /* UnitTests */ = {
 			isa = PBXGroup;
 			children = (
-				2354F18F2B8BFA7300B09B53 /* ListInteractorTest.swift */,
+				233E979B2B8C8CFE00D7E53E /* CardPresenterTest.swift */,
+				230EF0BB2B8CABAC005B537F /* CardInteractorTest.swift */,
 				2354F18B2B8BF9A400B09B53 /* ListPresenterTest.swift */,
+				2354F18F2B8BFA7300B09B53 /* ListInteractorTest.swift */,
+				230EF0B42B8C97F2005B537F /* MockClasses */,
+				239ADF2B2B8622B80020B467 /* PokeDokiUITests */,
 			);
 			path = UnitTests;
 			sourceTree = "<group>";
@@ -163,7 +184,6 @@
 			children = (
 				239ADF0A2B8622AE0020B467 /* PokeDoki */,
 				239ADF212B8622B80020B467 /* PokeDokiTests */,
-				239ADF2B2B8622B80020B467 /* PokeDokiUITests */,
 				239ADF092B8622AE0020B467 /* Products */,
 			);
 			sourceTree = "<group>";
@@ -406,8 +426,12 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				230EF0BE2B8CB9A0005B537F /* ListMockClasses.swift in Sources */,
+				233E979C2B8C8CFE00D7E53E /* CardPresenterTest.swift in Sources */,
 				2354F18D2B8BF9A400B09B53 /* ListPresenterTest.swift in Sources */,
+				230EF0BC2B8CABAC005B537F /* CardInteractorTest.swift in Sources */,
 				239ADF232B8622B80020B467 /* PokeDokiTests.swift in Sources */,
+				230EF0B32B8C96F1005B537F /* CardMockClasses.swift in Sources */,
 				2354F1912B8BFA7300B09B53 /* ListInteractorTest.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

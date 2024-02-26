@@ -52,7 +52,7 @@ class APICaller: APICallerProtocol{
         }
     }
     
-    func modifyURL() throws -> URL{
+    private func modifyURL() throws -> URL{
         guard URL(string: baseURL) != nil else { throw APIErrors.invalidURL }
         if offset >= Constants.numPokemons { throw APIErrors.invalidOffset }
         guard var components = URLComponents(string: baseURL) else { throw APIErrors.invalidURL}

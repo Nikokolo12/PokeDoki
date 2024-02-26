@@ -22,6 +22,4 @@ class ListConfigurator: ListConfiguratorProtocol{
         presenter.interactor = interactor
         presenter.router = router
     }
-    
-    
 }

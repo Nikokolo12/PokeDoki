@@ -32,24 +32,6 @@ class ListInteractor: ListInteractorProtocol{
         self.apiService = apiService
     }
     
-    func getListPokemon(completion: @escaping ([String]) -> Void){
-        do {
-            modelListPokemon = try context.fetch(ListPokemon.fetchRequest())
-            if modelListPokemon.count > counter {
-                print("HELLO")
-                 let pokeInfo = modelListPokemon.map(\.name)
-                    completion(pokeInfo as! [String])
-                
-            }  else {
-                openUrl() { result in
-                    completion(result)
-                }
-            }
-        } catch {
-            print("Error fetching PokemonItem from CoreData: \(error)")
-        }
-    }
-    
     func createListPokemon(name: String, index: Int64){
         let newListPokemon = ListPokemon(context: context)
         newListPokemon.index = index
@@ -63,15 +45,10 @@ class ListInteractor: ListInteractorProtocol{
 
     
     func openUrl(completion: @escaping ([String]) -> Void) {
-        apiService.fetchPokeData(pagination: false) { [self] result in
+        apiService.fetchPokeData(pagination: false) { result in
             switch result {
             case .success(let someData):
                 let names = someData.map(\.name)
-                
-                for i in 0 ... names.count - 1 {
-                    createListPokemon(name: names[i], index: Int64(i))
-                }
-                counter += names.count
                 completion(names)
             case .failure(let error):
                 print("Error with fetching: \(error)")

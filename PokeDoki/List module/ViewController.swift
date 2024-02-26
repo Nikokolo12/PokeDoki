@@ -12,9 +12,7 @@ protocol ListViewProtocol: AnyObject {
 }
 
 class ViewController: UIViewController, ListViewProtocol {
-    
     private var pokemons: [String] = []
-    private let apiCaller = APICaller()// TODO: remove
     private var tableView: UITableView = {
         let tableView = UITableView(frame: .zero, style: .grouped)
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -33,6 +31,12 @@ class ViewController: UIViewController, ListViewProtocol {
         super.viewDidLoad()
         configurator.configure(viewController: self)
         presenter.configureView()
+        
+        let headerView = CustomTableHeaderView(frame: CGRect(x: 0, y: 0, width: view.frame.width, height: 200))
+        let headerImage = UIImage(named: "header_view")
+        headerView.headerImageView.image = headerImage
+        tableView.tableHeaderView = headerView
+        view.addSubview(tableView)
         
         tableView.register(PokemonCell.self, forCellReuseIdentifier: PokemonCell.identifier)
         tableView.delegate = self
@@ -71,7 +75,7 @@ class ViewController: UIViewController, ListViewProtocol {
         return dataSource
     }
     
-    func applySnapshot() {
+    private func applySnapshot() {
         var snapshot = NSDiffableDataSourceSnapshot<ViewControllerSection, String>()
         snapshot.appendSections([.main])
         snapshot.appendItems(pokemons, toSection: .main)
@@ -111,3 +115,28 @@ extension ViewController: UIScrollViewDelegate {
 }
 
 
+class CustomTableHeaderView: UIView {
+    let headerImageView: UIImageView = {
+        let imageView = UIImageView()
+        imageView.contentMode = .scaleAspectFill
+        imageView.clipsToBounds = true
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        return imageView
+    }()
+    
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        addSubview(headerImageView)
+        
+        NSLayoutConstraint.activate([
+            headerImageView.leadingAnchor.constraint(equalTo: leadingAnchor),
+            headerImageView.trailingAnchor.constraint(equalTo: trailingAnchor),
+            headerImageView.topAnchor.constraint(equalTo: topAnchor),
+            headerImageView.heightAnchor.constraint(equalToConstant: 200)
+        ])
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init's not implemented'")
+    }
+}

@@ -57,7 +57,7 @@ class CardViewController: UIViewController, CardViewProtocol {
         pokeImageView.frame = CGRect(x: xCoord, y: 90, width: pokeImageView.bounds.width + 20, height: pokeImageView.bounds.height + 20)
         
     }
-    
+ 
     @objc private func dismissSelf(){
         presenter?.closeButtonClicked()
     }
